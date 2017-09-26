@@ -12,7 +12,7 @@
 #define LED4_Y 41
 #define LED4_G 43 //우
 #define buttonA 2
-const long interval = 40000; //40초
+int interval = 40000; //40초
 volatile bool state = true; //스위치가 눌렸는지를 판단하는 변수
 
 void setup() {
@@ -51,10 +51,11 @@ digitalWrite(LED1_G, LOW);
 digitalWrite(LED1_R, HIGH); 
 digitalWrite(LED2_R, LOW); digitalWrite(LED2_G, HIGH); //아래쪽 신호등만 초록색
 unsigned long previousMillis = millis();
-while(millis() - previousMillis <= interval) { //현재 시각과 이전 시각의 차이가 60초가 될 때까지 반복
+while(millis() - previousMillis <= interval) { //현재 시각과 이전 시각의 차이가 40초가 될 때까지 반복
   //시간 지연 동안에 다른 동작을 해야하므로 delay함수는 사용 못함
  if(state == false) { //스위치가 눌렸으면
-   delay(3000); //3초간 대기
+    interval -= (millis()-previousMillis); //2번 초록불의 남은 시간을 인터벌에 새로 저장
+    delay(3000); //3초간 대기
     digitalWrite(LED2_G, LOW); //초록불을 꺼준다
     for(int delaytime=0; delaytime <10; delaytime++){ //10초간
     digitalWrite(LED2_Y, HIGH); //노란 신호가 들어옴
@@ -63,13 +64,14 @@ while(millis() - previousMillis <= interval) { //현재 시각과 이전 시각�
     delay(500); //1초 간격으로 깜빡임
     } 
     digitalWrite(LED2_R, HIGH); //빨간 신호를 켠다
-    state = true; //동작이 끝났으니 변수를 원래 상태로 돌려줌
     delay(20000);
+    state = true; //동작이 끝났으니 변수를 원래 상태로 돌려줌
     digitalWrite(LED2_R, LOW);
     digitalWrite(LED2_G, HIGH); //다시 초록 신호를 켜준다
-    previousMillis = millis() - 30000; //빨간 신호를 켜서 딜레이 된 만큼 지연 시간을 늘려줌
+    previousMillis = millis(); //현재시각 저장
  }
 }
+interval = 40000; //인터벌 40초로 초기화
 digitalWrite(LED2_G, LOW);
 for(int delaytime=0; delaytime <10; delaytime++){
 digitalWrite(LED2_Y, HIGH);
@@ -77,7 +79,7 @@ delay(500);
 digitalWrite(LED2_Y, LOW);
 delay(500); // 초록 -> 빨강 될때 황색으로 경고
   } 
- digitalWrite(LED2_G, LOW);
+digitalWrite(LED2_G, LOW);
 // ---------------------------------------------------2번(하) 초록 보행자신호 넣어주기
 digitalWrite(LED2_R, HIGH); 
 digitalWrite(LED3_R, LOW); digitalWrite(LED3_G, HIGH); //위쪽 신호등만 초록색
