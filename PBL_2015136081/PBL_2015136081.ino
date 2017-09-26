@@ -106,7 +106,7 @@ digitalWrite(LED4_G, LOW);
 }
 
 void tTof(){ //스위치가 눌렸을 때 실행되는 함수
- if(digitalRead(LED1_G) == HIGH) state = false; //스위치가 눌리면 state의 값을 바꿔준다
+ if(digitalRead(LED2_G) == HIGH) state = false; //스위치가 눌리면 state의 값을 바꿔준다
 }
 
 //스위치를 누르면 인터럽트를 통해 상태를 바꿔주고 루프문에서 바뀐 상태를 가지고 조건문 실행
