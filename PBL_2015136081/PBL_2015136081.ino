@@ -37,7 +37,7 @@ void loop() {
   //녹색 -> 노랑 -> 빨강 -> 녹색->무한루프
   //신호가 초록일때 보행자 버튼 (3초 후에 노랑 -> 빨강)
 digitalWrite(LED2_R, HIGH); digitalWrite(LED3_R, HIGH); digitalWrite(LED4_R, HIGH); 
-digitalWrite(LED1_G, HIGH); //위쪽 신호등만 초록색
+digitalWrite(LED1_R, LOW); digitalWrite(LED1_G, HIGH); //위쪽 신호등만 초록색
 delay(40000); //40초간 켜줌
 digitalWrite(LED1_G, LOW);
 for(int delaytime=0; delaytime <10; delaytime++){// 초록 -> 빨강 될때 황색으로 경고
