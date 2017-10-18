@@ -247,6 +247,8 @@ void loop() {
   digitalWrite(RedLED_1, LOW); //상하 빨간불 꺼줌
 }
 
+//------------------------------------------------------각종 함수
+
 void YellowBlink(int pin) {
   unsigned long startTime, endTime;
   startTime = endTime = millis();
